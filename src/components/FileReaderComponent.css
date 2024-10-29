@@ -1,0 +1,81 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.inputFile {
+  margin-bottom: 20px;
+}
+
+.fileContentContainer {
+  font-family: "Courier New", Courier, monospace; /* Fonte monoespaçada */
+  white-space: pre; /* Preserva quebras de linha e espaços */
+  overflow-x: auto;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+}
+
+.fileContent {
+  font-family: "Courier New", Courier, monospace; /* Fonte monoespaçada para exibir o texto */
+  color: #333;
+}
+
+/* Estilos de destaque */
+.highlight {
+  background-color: lightblue; /* Cor de fundo azul claro */
+  font-weight: bold;
+  display: inline; /* Remove comportamento de bloco */
+  margin: 0; /* Remove qualquer margem extra */
+  padding: 0; /* Remove padding para evitar deslocamento */
+}
+
+.highlight-orange {
+  background-color: orange; /* Cor de fundo laranja */
+  font-weight: bold;
+  display: inline;
+}
+
+.highlight-green {
+  background-color: lightgreen; /* Cor de fundo verde claro */
+  font-weight: bold;
+  display: inline;
+}
+
+.highlight-purple {
+  background-color: rgb(229, 116, 252); /* Cor de fundo roxo */
+  font-weight: bold;
+  display: inline;
+}
+
+/* Estilo para mensagens de erro */
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Legenda */
+.legend {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #f1f1f1;
+}
+
+.legend div {
+  margin-bottom: 5px;
+}
+
+.legend .highlight,
+.legend .highlight-orange,
+.legend .highlight-green,
+.legend .highlight-purple {
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+}
