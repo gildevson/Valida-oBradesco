@@ -22,33 +22,31 @@
 }
 
 .fileContent {
-  font-family: "Courier New", Courier, monospace; /* Fonte monoespaçada para exibir o texto */
+  font-family: "Courier New", Courier, monospace;
   color: #333;
 }
 
 /* Estilos de destaque */
-.highlight {
-  background-color: lightblue; /* Cor de fundo azul claro */
-  font-weight: bold;
-  display: inline; /* Remove comportamento de bloco */
-  margin: 0; /* Remove qualquer margem extra */
-  padding: 0; /* Remove padding para evitar deslocamento */
-}
-
 .highlight-orange {
-  background-color: orange; /* Cor de fundo laranja */
-  font-weight: bold;
-  display: inline;
-}
-
-.highlight-green {
-  background-color: lightgreen; /* Cor de fundo verde claro */
+  background-color: orange;
   font-weight: bold;
   display: inline;
 }
 
 .highlight-purple {
   background-color: rgb(229, 116, 252); /* Cor de fundo roxo */
+  font-weight: bold;
+  display: inline;
+}
+
+.highlight-green {
+  background-color: lightgreen;
+  font-weight: bold;
+  display: inline;
+}
+
+.highlight-blue {
+  background-color: lightblue;
   font-weight: bold;
   display: inline;
 }
@@ -71,10 +69,10 @@
   margin-bottom: 5px;
 }
 
-.legend .highlight,
 .legend .highlight-orange,
+.legend .highlight-purple,
 .legend .highlight-green,
-.legend .highlight-purple {
+.legend .highlight-blue {
   padding: 2px 5px;
   border-radius: 3px;
   font-weight: bold;
