@@ -51,6 +51,11 @@
   display: inline;
 }
 
+.highlight-grey {
+  background-color: grey;
+  font-weight: bold;
+  display: inline;
+}
 /* Estilo para mensagens de erro */
 .error {
   color: red;

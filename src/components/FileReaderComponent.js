@@ -1,81 +1,79 @@
 import React, { useState } from "react";
-import "./FileReaderComponent.css"; // Certifique-se de que esse arquivo contém o CSS atualizado
+import "./FileReaderComponent.css"; // Arquivo CSS para estilizar o componente
 
 function FileReaderComponent() {
-  const [fileContent, setFileContent] = useState("");
-  const [error, setError] = useState(""); // Para exibir erros caso o tipo de arquivo seja inválido
+  const [fileContent, setFileContent] = useState(""); // Estado para armazenar o conteúdo do arquivo
+  const [error, setError] = useState(""); // Estado para armazenar mensagens de erro
 
+  // Função chamada quando um arquivo é selecionado
   const handleFileUpload = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]; // Obtém o primeiro arquivo selecionado
 
+    // Verifica se o arquivo possui as extensões permitidas (.rem ou .ret)
     if (file && (file.name.toLowerCase().endsWith(".rem") || file.name.toLowerCase().endsWith(".ret"))) {
-      const reader = new FileReader();
-      setError(""); // Limpa qualquer mensagem de erro anterior
+      const reader = new FileReader(); // Cria uma instância do FileReader
+      setError(""); // Limpa mensagens de erro anteriores
 
+      // Evento disparado quando a leitura do arquivo é concluída
       reader.onload = (event) => {
         setFileContent(event.target.result); // Armazena o conteúdo do arquivo no estado
       };
 
       reader.readAsText(file); // Lê o arquivo como texto
     } else {
+      // Define uma mensagem de erro se o tipo do arquivo for inválido
       setError("Por favor, selecione um arquivo com extensão .rem ou .ret.");
-      setFileContent(""); // Limpa o conteúdo anterior se houver um erro
+      setFileContent(""); // Limpa o conteúdo anterior
     }
   };
 
+  // Função para processar o texto e aplicar destaques
   const highlightText = () => {
     const lines = fileContent.split("\n");
-
+  
     return lines.map((line, index) => {
+      // A primeira linha é exibida sem destaque
       if (index === 0) {
-        // Primeira linha retorna sem formatação
         return <div key={index}>{line}</div>;
-      } else if (line.length > 394) {
-        // Tratamento das colunas de 121-126, 234-274, 275-314, e 351-394
-        // Excluindo o trecho inicial de qualquer destaque.
-
-        const initialPart = line.slice(0, 120); // Parte inicial sem formatação
-        const highlight121 = line.slice(120, 126); // Destaque laranja (vencimento do título)
-        const after121 = line.slice(126, 234); // Parte após o destaque laranja e antes do roxo
-
-        const highlight234 = line.slice(234, 274); // Destaque roxo (Nome do Sacado)
-        const after234 = line.slice(274, 314); // Parte após o destaque roxo e antes do verde
-
-        const highlight275 = line.slice(274, 314); // Destaque verde (campo novo)
-        const after275 = line.slice(314, 351); // Parte após o destaque verde e antes do azul
-
-        const highlight351 = line.slice(351, 394); // Destaque azul (nome do cedente)
-        const after351 = line.slice(394); // Parte após o destaque azul
-
+      }
+  
+      // Demais linhas recebem destaque
+      if (line.length > 394) {
+        const initialPart = line.slice(0, 37);
+        const highlight37 = line.slice(37, 43);
+        const after43 = line.slice(43, 120);
+        const highlight121 = line.slice(120, 126);
+        const after121 = line.slice(126, 234);
+        const highlight234 = line.slice(234, 274);
+        const highlight275 = line.slice(274, 314);
+        const after275 = line.slice(314, 351);
+        const highlight351 = line.slice(351, 394);
+        const after351 = line.slice(394);
+  
         return (
           <div key={index}>
-            {initialPart} {/* Exibe o trecho inicial sem formatação */}
+            {initialPart}
+            <span className="highlight-grey">{highlight37}</span>
+            {after43}
             <span className="highlight-orange">{highlight121}</span>
             {after121}
             <span className="highlight-purple">{highlight234}</span>
-            {after234}
             <span className="highlight-green">{highlight275}</span>
             {after275}
             <span className="highlight-blue">{highlight351}</span>
             {after351}
           </div>
         );
-      } else if (line.length > 120) {
-        // Se a linha só for maior que 120 caracteres (somente destaque laranja, roxo e verde)
-        const initialPart = line.slice(0, 120);
-        const highlight121 = line.slice(120, 126);
-        const after121 = line.slice(126, 234);
-
-        const highlight234 = line.length >= 274 ? line.slice(234, 274) : "";
-        const after234 = line.length > 274 ? line.slice(274) : "";
-
+      } else if (line.length > 43) {
+        const initialPart = line.slice(0, 37);
+        const highlight37 = line.slice(37, 43);
+        const after43 = line.slice(43);
+  
         return (
           <div key={index}>
-            {initialPart} {/* Exibe o trecho inicial sem formatação */}
-            <span className="highlight-orange">{highlight121}</span>
-            {after121}
-            {highlight234 && <span className="highlight-purple">{highlight234}</span>}
-            {after234}
+            {initialPart}
+            <span className="highlight-grey">{highlight37}</span>
+            {after43}
           </div>
         );
       } else {
@@ -83,20 +81,29 @@ function FileReaderComponent() {
       }
     });
   };
+  
 
   return (
     <div className="container">
+      {/* Cabeçalho */}
       <div className="header">Leitor de Arquivo .rem</div>
+
+      {/* Input para upload de arquivo */}
       <input
         type="file"
-        accept=".rem, .ret"
-        onChange={handleFileUpload}
+        accept=".rem, .ret" // Aceita apenas arquivos com extensões .rem e .ret
+        onChange={handleFileUpload} // Liga o evento de mudança à função de upload
         className="inputFile"
       />
+
+      {/* Exibição de mensagens de erro */}
       {error && <div className="error">{error}</div>}
 
-      {/* Legenda ajustada */}
+      {/* Legenda explicando os destaques */}
       <div className="legend">
+        <div>
+          <span className="highlight-grey">Texto Cinza</span>: Doc_ID (37-43)
+        </div>
         <div>
           <span className="highlight-orange">Texto Laranja</span>: Campo de vencimento do título
         </div>
@@ -109,8 +116,14 @@ function FileReaderComponent() {
         <div>
           <span className="highlight-blue">Texto Azul</span>: Nome do Cedente (351-394)
         </div>
+        <div>
+          <span className="highlight-blue">Texto ROSA</span>: Nome do Cedente (110-121)
+        </div>
+
+      
       </div>
 
+      {/* Conteúdo do arquivo exibido com destaques */}
       <div className="fileContentContainer">
         <pre className="fileContent">{highlightText()}</pre>
       </div>
