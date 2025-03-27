@@ -2,53 +2,61 @@ import React, { useState } from "react";
 import "./FileReaderComponent.css"; // Arquivo CSS para estilizar o componente
 
 function FileReaderComponent() {
-  const [fileContent, setFileContent] = useState(""); // Estado para armazenar o conteúdo do arquivo
-  const [error, setError] = useState(""); // Estado para armazenar mensagens de erro
+  const [fileContent, setFileContent] = useState("");
+  const [error, setError] = useState("");
 
-  // Função chamada quando um arquivo é selecionado
   const handleFileUpload = (e) => {
-    const file = e.target.files[0]; // Obtém o primeiro arquivo selecionado
+    const file = e.target.files[0];
 
-    // Verifica se o arquivo possui as extensões permitidas (.rem ou .ret)
     if (file && (file.name.toLowerCase().endsWith(".rem") || file.name.toLowerCase().endsWith(".ret"))) {
-      const reader = new FileReader(); // Cria uma instância do FileReader
-      setError(""); // Limpa mensagens de erro anteriores
+      const reader = new FileReader();
+      setError("");
 
-      // Evento disparado quando a leitura do arquivo é concluída
       reader.onload = (event) => {
-        setFileContent(event.target.result); // Armazena o conteúdo do arquivo no estado
+        setFileContent(event.target.result);
       };
 
-      reader.readAsText(file); // Lê o arquivo como texto
+      reader.readAsText(file);
     } else {
-      // Define uma mensagem de erro se o tipo do arquivo for inválido
       setError("Por favor, selecione um arquivo com extensão .rem ou .ret.");
-      setFileContent(""); // Limpa o conteúdo anterior
+      setFileContent("");
     }
   };
 
-  // Função para processar o texto e aplicar destaques
   const highlightText = () => {
-    const lines = fileContent.split("\n");
-  
+    const lines = fileContent
+      .split("\n")
+      .filter((line) => line.trim() !== ""); // remove linhas em branco
+
     return lines.map((line, index) => {
-      // A primeira linha é exibida sem destaque
-      if (index === 0) {
-        return <div key={index}>{line}</div>;
+      // Garante que a linha de header não seja destacada
+      if (line.startsWith("01REMESSA")) {
+        const mainPart = line.slice(1, 394);
+        const highlight394 = line.slice(394, 400);
+        const after400 = line.slice(400);
+      
+        return (
+          <div key={index}>
+            {mainPart}
+            <span className="highlight-yellow">{highlight394}</span>
+            {after400}
+          </div>
+        );
       }
-  
+
       if (line.length > 394) {
         const initialPart = line.slice(0, 37);
         const highlight37 = line.slice(37, 43);
         const before110 = line.slice(43, 110);
-        const highlight110 = line.slice(110, 120); // Correto: pega da posição 110 até 120 inclusive
+        const highlight110 = line.slice(110, 120); // 110 até 120
         const after121 = line.slice(120, 234);
         const highlight234 = line.slice(234, 274);
         const highlight275 = line.slice(274, 314);
         const after275 = line.slice(314, 351);
         const highlight351 = line.slice(351, 394);
-        const after351 = line.slice(394);
-  
+        const highlight394 = line.slice(394, 400);
+        const after400 = line.slice(400);
+
         return (
           <div key={index}>
             {initialPart}
@@ -60,14 +68,15 @@ function FileReaderComponent() {
             <span className="highlight-green">{highlight275}</span>
             {after275}
             <span className="highlight-blue">{highlight351}</span>
-            {after351}
+            <span className="highlight-yellow">{highlight394}</span>
+            {after400}
           </div>
         );
       } else if (line.length > 43) {
         const initialPart = line.slice(0, 37);
         const highlight37 = line.slice(37, 43);
         const after43 = line.slice(43);
-  
+
         return (
           <div key={index}>
             {initialPart}
@@ -80,26 +89,20 @@ function FileReaderComponent() {
       }
     });
   };
-  
-
 
   return (
     <div className="container">
-      {/* Cabeçalho */}
       <div className="header">Leitor de Arquivo .rem</div>
 
-      {/* Input para upload de arquivo */}
       <input
         type="file"
-        accept=".rem, .ret" // Aceita apenas arquivos com extensões .rem e .ret
-        onChange={handleFileUpload} // Liga o evento de mudança à função de upload
+        accept=".rem, .ret"
+        onChange={handleFileUpload}
         className="inputFile"
       />
 
-      {/* Exibição de mensagens de erro */}
       {error && <div className="error">{error}</div>}
 
-      {/* Legenda explicando os destaques */}
       <div className="legend">
         <div>
           <span className="highlight-grey">Texto Cinza</span>: Doc_id do (37-43)
@@ -116,15 +119,14 @@ function FileReaderComponent() {
         <div>
           <span className="highlight-blue">Texto Azul</span>: Nome do Cedente (351-394)
         </div>
-      
         <div>
-        <span className="highlight-pink">Texto Rosa</span>: Número do Documento (110-120)
+          <span className="highlight-pink">Texto Rosa</span>: Número do Documento (110-120)
         </div>
-
-
+        <div>
+          <span className="highlight-yellow">Texto Amarelo</span>: Identificador de linha (394–399)
+        </div>
       </div>
 
-      {/* Conteúdo do arquivo exibido com destaques */}
       <div className="fileContentContainer">
         <pre className="fileContent">{highlightText()}</pre>
       </div>
