@@ -37,13 +37,12 @@ function FileReaderComponent() {
         return <div key={index}>{line}</div>;
       }
   
-      // Demais linhas recebem destaque
       if (line.length > 394) {
         const initialPart = line.slice(0, 37);
         const highlight37 = line.slice(37, 43);
-        const after43 = line.slice(43, 120);
-        const highlight121 = line.slice(120, 126);
-        const after121 = line.slice(126, 234);
+        const before110 = line.slice(43, 110);
+        const highlight110 = line.slice(110, 120); // Correto: pega da posição 110 até 120 inclusive
+        const after121 = line.slice(120, 234);
         const highlight234 = line.slice(234, 274);
         const highlight275 = line.slice(274, 314);
         const after275 = line.slice(314, 351);
@@ -54,8 +53,8 @@ function FileReaderComponent() {
           <div key={index}>
             {initialPart}
             <span className="highlight-grey">{highlight37}</span>
-            {after43}
-            <span className="highlight-orange">{highlight121}</span>
+            {before110}
+            <span className="highlight-pink">{highlight110}</span>
             {after121}
             <span className="highlight-purple">{highlight234}</span>
             <span className="highlight-green">{highlight275}</span>
@@ -83,6 +82,7 @@ function FileReaderComponent() {
   };
   
 
+
   return (
     <div className="container">
       {/* Cabeçalho */}
@@ -102,7 +102,7 @@ function FileReaderComponent() {
       {/* Legenda explicando os destaques */}
       <div className="legend">
         <div>
-          <span className="highlight-grey">Texto Cinza</span>: Doc_ID (37-43)
+          <span className="highlight-grey">Texto Cinza</span>: Doc_id do (37-43)
         </div>
         <div>
           <span className="highlight-orange">Texto Laranja</span>: Campo de vencimento do título
@@ -116,11 +116,12 @@ function FileReaderComponent() {
         <div>
           <span className="highlight-blue">Texto Azul</span>: Nome do Cedente (351-394)
         </div>
+      
         <div>
-          <span className="highlight-blue">Texto ROSA</span>: Nome do Cedente (110-121)
+        <span className="highlight-pink">Texto Rosa</span>: Número do Documento (110-120)
         </div>
 
-      
+
       </div>
 
       {/* Conteúdo do arquivo exibido com destaques */}

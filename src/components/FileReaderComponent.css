@@ -82,3 +82,11 @@
   border-radius: 3px;
   font-weight: bold;
 }
+
+
+.highlight-pink {
+  background-color: #ff69b4;
+  color: white;
+  padding: 0 2px;
+  border-radius: 3px;
+}
