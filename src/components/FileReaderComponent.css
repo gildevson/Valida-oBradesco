@@ -80,7 +80,8 @@
 .legend .highlight-orange,
 .legend .highlight-purple,
 .legend .highlight-green,
-.legend .highlight-blue {
+.legend .highlight-blue
+.legend .highlight-red {
   padding: 2px 5px;
   border-radius: 3px;
   font-weight: bold;
@@ -101,4 +102,28 @@
   border-radius: 3px;
 }
 
+.highlight-red {
+  background-color: rgb(255, 0, 64);
+  color: black;
+  padding: 0 2px;
+  border-radius: 3px;
+}
 
+
+
+.legend-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.legend-table th,
+.legend-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.legend-table th {
+  background-color: #f2f2f2;
+}

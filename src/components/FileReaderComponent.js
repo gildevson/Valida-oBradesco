@@ -36,6 +36,7 @@ function FileReaderComponent() {
         const highlight394 = paddedLine.slice(394, 400);
         const after400 = paddedLine.slice(400);
 
+
         return (
           <div key={index}>
             <span className="fileLine">{mainPart}</span>
@@ -46,36 +47,39 @@ function FileReaderComponent() {
       }
 
       if (line.length > 394) {
-  const initialPart = line.slice(0, 37);
-  const highlight37 = line.slice(37, 43);
-  const before110 = line.slice(43, 110);
-  const highlight110 = line.slice(110, 120); // Número do documento
-  const highlightVencimento = line.slice(120, 126); // Vencimento do título
-  const afterVencimento = line.slice(126, 234);
-  const highlight234 = line.slice(234, 274); // Nome do Sacado
-  const highlight275 = line.slice(274, 314); // Endereço
-  const after275 = line.slice(314, 351);
-  const highlight351 = line.slice(351, 394); // Nome do Cedente
-  const highlight394 = line.slice(394, 400);
-  const after400 = line.slice(400);
+        const initialPart = line.slice(0, 37);
+        const highlight37 = line.slice(37, 43);
+        const beforeNn83 = line.slice(72, 83);
+        const after110 = line.slice(83, 110);
+        const highlight110 = line.slice(110, 120); // Número do documento
+        const highlightVencimento = line.slice(120, 126); // Vencimento do título
+        const afterVencimento = line.slice(126, 234);
+        const highlight234 = line.slice(234, 274); // Nome do Sacado
+        const highlight275 = line.slice(274, 314); // Endereço
+        const after275 = line.slice(314, 351);
+        const highlight351 = line.slice(351, 394); // Nome do Cedente
+        const highlight394 = line.slice(394, 400);
+        const after400 = line.slice(400);
 
-  return (
-    <div key={index}>
-      {initialPart}
-      <span className="highlight-grey">{highlight37}</span>
-      {before110}
-      <span className="highlight-pink">{highlight110}</span>
-      <span className="highlight-orange">{highlightVencimento}</span>
-      {afterVencimento}
-      <span className="highlight-purple">{highlight234}</span>
-      <span className="highlight-green">{highlight275}</span>
-      {after275}
-      <span className="highlight-blue">{highlight351}</span>
-      <span className="highlight-yellow">{highlight394}</span>
-      {after400}
-    </div>
-  );
-}else if (line.length > 43) {
+        return (
+          <div key={index}>
+            {initialPart}
+            <span className="highlight-grey">{highlight37}</span>
+            {line.slice(43, 72)}
+            <span className="highlight-red">{beforeNn83}</span>
+            {after110}
+            <span className="highlight-pink">{highlight110}</span>
+            <span className="highlight-orange">{highlightVencimento}</span>
+            {afterVencimento}
+            <span className="highlight-purple">{highlight234}</span>
+            <span className="highlight-green">{highlight275}</span>
+            {after275}
+            <span className="highlight-blue">{highlight351}</span>
+            <span className="highlight-yellow">{highlight394}</span>
+            {after400}
+          </div>
+        );
+      } else if (line.length > 43) {
         const initialPart = line.slice(0, 37);
         const highlight37 = line.slice(37, 43);
         const after43 = line.slice(43);
@@ -107,28 +111,59 @@ function FileReaderComponent() {
       {error && <div className="error">{error}</div>}
 
       <div className="legend">
-        <div>
-          <span className="highlight-grey">Texto Cinza</span>: Doc_id do (37-43)
-        </div>
-        <div>
-          <span className="highlight-orange">Texto Laranja</span>: Campo de vencimento do título
-        </div>
-        <div>
-          <span className="highlight-purple">Texto Roxo</span>: Nome do Sacado (234-274)
-        </div>
-        <div>
-          <span className="highlight-green">Texto Verde</span>: Endereço SACADO
-        </div>
-        <div>
-          <span className="highlight-blue">Texto Azul</span>: Nome do Cedente (351-394)
-        </div>
-        <div>
-          <span className="highlight-pink">Texto Rosa</span>: Número do Documento (110-120)
-        </div>
-        <div>
-          <span className="highlight-yellow">Texto Amarelo</span>: Identificador de linha (394–399)
-        </div>
+        <table className="legend-table">
+          <thead>
+            <tr>
+              <th>Cor</th>
+              <th>Descrição</th>
+              <th>Posição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span className="highlight-grey">Cinza</span></td>
+              <td>Doc_id</td>
+              <td>37–43</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-orange">Laranja</span></td>
+              <td>Vencimento do Título</td>
+              <td>120–126</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-purple">Roxo</span></td>
+              <td>Nome do Sacado</td>
+              <td>234–274</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-green">Verde</span></td>
+              <td>Endereço do Sacado</td>
+              <td>274–314</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-blue">Azul</span></td>
+              <td>Nome do Cedente</td>
+              <td>351–394</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-pink">Rosa</span></td>
+              <td>Número do Documento</td>
+              <td>110–120</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-yellow">Amarelo</span></td>
+              <td>Identificador de Linha</td>
+              <td>394–399</td>
+            </tr>
+            <tr>
+              <td><span className="highlight-red">Vermelho</span></td>
+              <td>Identificador de NN</td>
+              <td>72–83</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
 
       <div className="fileContentContainer">
         <pre className="fileContent">{highlightText()}</pre>
