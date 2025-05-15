@@ -1,0 +1,6 @@
+If {vw_cautela.emp_cgc} = "48.173.042/0001-50" Then //PLATA S.A. SECURITIZADORA
+   "em 10 de novembro de 2009"
+Else If {vw_cautela.emp_cgc} = "59.073.859/0001-73" Then //LAB S/A SECURITIZACAO
+   "em 24 de Janeiro de 2025"
+Else
+   ""

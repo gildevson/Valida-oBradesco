@@ -31,18 +31,19 @@ function FileReaderComponent() {
     return lines.map((line, index) => {
       // Garante que a linha de header não seja destacada
       if (line.startsWith("01REMESSA")) {
-        const mainPart = line.slice(1, 394);
-        const highlight394 = line.slice(394, 400);
-        const after400 = line.slice(400);
-      
-        return (
-          <div key={index}>
-            {mainPart}
-            <span className="highlight-yellow">{highlight394}</span>
-            {after400}
-          </div>
-        );
-      }
+  const paddedLine = line.padEnd(400, " "); // garante 400 caracteres
+  const mainPart = paddedLine.slice(0, 394);
+  const highlight394 = paddedLine.slice(394, 400);
+  const after400 = paddedLine.slice(400);
+
+  return (
+    <div key={index}>
+      <span className="fileLine">{mainPart}</span>
+      <span className="highlight-yellow">{highlight394}</span>
+      {after400}
+    </div>
+  );
+}
 
       if (line.length > 394) {
         const initialPart = line.slice(0, 37);
