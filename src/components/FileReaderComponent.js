@@ -65,7 +65,7 @@ function FileReaderComponent() {
           <div key={index}>
             {initialPart}
             <span className="highlight-grey">{highlight37}</span>
-            {line.slice(43, 72)}
+            {line.slice(44, 72)}
             <span className="highlight-red">{beforeNn83}</span>
             {after110}
             <span className="highlight-pink">{highlight110}</span>
