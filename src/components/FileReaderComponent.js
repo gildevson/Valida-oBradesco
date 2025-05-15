@@ -31,49 +31,51 @@ function FileReaderComponent() {
     return lines.map((line, index) => {
       // Garante que a linha de header não seja destacada
       if (line.startsWith("01REMESSA")) {
-  const paddedLine = line.padEnd(400, " "); // garante 400 caracteres
-  const mainPart = paddedLine.slice(0, 394);
-  const highlight394 = paddedLine.slice(394, 400);
-  const after400 = paddedLine.slice(400);
-
-  return (
-    <div key={index}>
-      <span className="fileLine">{mainPart}</span>
-      <span className="highlight-yellow">{highlight394}</span>
-      {after400}
-    </div>
-  );
-}
-
-      if (line.length > 394) {
-        const initialPart = line.slice(0, 37);
-        const highlight37 = line.slice(37, 43);
-        const before110 = line.slice(43, 110);
-        const highlight110 = line.slice(110, 120); // 110 até 120
-        const after121 = line.slice(120, 234);
-        const highlight234 = line.slice(234, 274);
-        const highlight275 = line.slice(274, 314);
-        const after275 = line.slice(314, 351);
-        const highlight351 = line.slice(351, 394);
-        const highlight394 = line.slice(394, 400);
-        const after400 = line.slice(400);
+        const paddedLine = line.padEnd(400, " "); // garante 400 caracteres
+        const mainPart = paddedLine.slice(0, 394);
+        const highlight394 = paddedLine.slice(394, 400);
+        const after400 = paddedLine.slice(400);
 
         return (
           <div key={index}>
-            {initialPart}
-            <span className="highlight-grey">{highlight37}</span>
-            {before110}
-            <span className="highlight-pink">{highlight110}</span>
-            {after121}
-            <span className="highlight-purple">{highlight234}</span>
-            <span className="highlight-green">{highlight275}</span>
-            {after275}
-            <span className="highlight-blue">{highlight351}</span>
+            <span className="fileLine">{mainPart}</span>
             <span className="highlight-yellow">{highlight394}</span>
             {after400}
           </div>
         );
-      } else if (line.length > 43) {
+      }
+
+      if (line.length > 394) {
+  const initialPart = line.slice(0, 37);
+  const highlight37 = line.slice(37, 43);
+  const before110 = line.slice(43, 110);
+  const highlight110 = line.slice(110, 120); // Número do documento
+  const highlightVencimento = line.slice(120, 126); // Vencimento do título
+  const afterVencimento = line.slice(126, 234);
+  const highlight234 = line.slice(234, 274); // Nome do Sacado
+  const highlight275 = line.slice(274, 314); // Endereço
+  const after275 = line.slice(314, 351);
+  const highlight351 = line.slice(351, 394); // Nome do Cedente
+  const highlight394 = line.slice(394, 400);
+  const after400 = line.slice(400);
+
+  return (
+    <div key={index}>
+      {initialPart}
+      <span className="highlight-grey">{highlight37}</span>
+      {before110}
+      <span className="highlight-pink">{highlight110}</span>
+      <span className="highlight-orange">{highlightVencimento}</span>
+      {afterVencimento}
+      <span className="highlight-purple">{highlight234}</span>
+      <span className="highlight-green">{highlight275}</span>
+      {after275}
+      <span className="highlight-blue">{highlight351}</span>
+      <span className="highlight-yellow">{highlight394}</span>
+      {after400}
+    </div>
+  );
+}else if (line.length > 43) {
         const initialPart = line.slice(0, 37);
         const highlight37 = line.slice(37, 43);
         const after43 = line.slice(43);
